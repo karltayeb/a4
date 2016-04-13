@@ -1,0 +1,44 @@
+Karl Tayeb ktayeb1 (Section 02)
+Jack Karyo jkaryo1 (Section 01) ???
+Assignment: A4
+Due: 4/13/2016
+
+The general approach to this test file is to test each of the methods on both empty and non-empty instances of a MaxPriorityQueue. All of the tests
+are done on MaxPQHeap<Integer> since Integers are easily comparable types that we and the grader can easily confirm the validity of the tests.
+
+Expaination of Empty-Queue Tests:
+
+Explaination of Non-Empty Queue Tests:
+There are a number of queues we test on:
+-smalltolarge was built by inserting values from smallest to largest [0,99]
+-largetosmall was built by inserting values from largest to smallest [0,99]
+-allsame was built by repeatedly adding 1
+-randomgen was built by inserting 99 then 99 other random ints between 1 and 50
+-differentsizes is an array of MaxPQHeaps where each index i stores a heap with values from 0 to i inclusive.
+
+The first two are tested to ensure that the order that entries are added put in the queue does not interfere with the way the queue works
+The third is tested on to ensure that the queue works when there are duplicate values
+The random queue is tested on as a mixed test that both ensures duplicates while providing more than one value
+Different sizes is tested on to make sure that the MaxPQ words as intended when it is at varying size. The motivation for this is that an implementation of MaxPQHeap should need to work regardless of the depth of the heap.
+
+testSizeNonEmpty()
+testIsEmptyNonEmpty()
+testClearNonEmpty()
+testGetMaxNonEmpty()
+
+are the tests that test size(), isEmpty(), clear(), and getMax() for non-empty queues. Each of these tests tests all of the relevant queues mentioned above and provides useful assert-failed error messages for most cases. While each of these tests may have been broken up into several tests we feel that the way we organized it makes it easy to read the code without sacrificing clarity.
+
+Insert and remove require more extensive testing so we break each of them into several tests:
+
+removeMaxSmallToLarge()
+removeMaxLargeToSmall()
+removeMaxAllSame()
+removeMaxRemovesSameAsGetMax()
+
+are the tests for remove. Each of them takes the relevant priority queue and removes elements until the queue is empty. Since each of the tests implicity test at varying size we break up the tests by the different potential queue constructions, making sure to deal with removing values when there are replicates in the queue. We check if size and maxvalue are updated with each remove.
+
+testInsertSmallerValsNonEmpty()
+testInsertLargerValsNonEmpty()
+testInertionOfDuplicates()
+
+are the tests we have for insertion on non-empty queues. Again, since we add multiple values in each test it already implicity tests for insertion on varying sized queues. Here we break up the tests by how the values being inserted compare to the values already in the queue (namely, the max value). Thus we check if size, and max value are updated.

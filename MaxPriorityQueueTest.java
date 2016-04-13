@@ -209,7 +209,7 @@ public class MaxPriorityQueueTest {
 
     /* Inserts values larger than/ equal to the max value */
     public void testInsertLargerValsNonEmpty() {
-    	for (int i = 0; i <= 11; i++) {
+    	for (int i = 1; i <= 11; i++) {
     		smalltolarge.insert(i + 99);
     		largetosmall.insert(i + 99);
     		randomgen.insert(i + 99);
@@ -225,5 +225,25 @@ public class MaxPriorityQueueTest {
     		assertTrue("MaxVal not updated when insert value >= max", randomgen.getMax() == (99 + i));
 
     	}
+    }
+
+    public void testInertionOfDuplicates() {
+    	// Repeatedly insert 1's to allsame
+    	for (int i = 1; i <= 11; i++) {
+    		allsame.insert(1);
+    		assertTrue("Size not updated when inserting duplicates", allsame.size() == (100 + i));
+    		assertTrue("MaxVal changed when inserting a duplicate value", allsame.getMax() == 1);
+    	}
+
+    	//Repeatedly insert duplicate random values to randomgen
+        int random;
+        for (int i = 1; i < 100; i++) {
+            // Ensures repeats and that 99 is the largest value
+        	random = (Integer)(int)(Math.random() * 50 + 1);
+        	randomgen.insert((Integer) random);
+
+    		assertTrue("Size not updated when inserting duplicates", allsame.size() == (100 + i));
+    		assertTrue("MaxVal changed when inserting submaximal duplicate value", allsame.getMax() == 99);
+        }
     }
 }
