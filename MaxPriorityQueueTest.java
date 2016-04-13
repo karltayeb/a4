@@ -23,7 +23,7 @@ public class MaxPriorityQueueTest {
         largetosmall = new MaxPQHeap();
         allsame = new MaxPQHeap();
         randomgen = new MaxPQHeap();
-        differentsizes = new MaxPQHeap<Integer>[100];
+        differentsizes = new MaxPQHeap[100];
 
         for (int i = 0; i < 100; i++) {
             smalltolarge.insert((Integer) i);
@@ -35,7 +35,7 @@ public class MaxPriorityQueueTest {
         for (int i = 0; i < 100; i++) {
         	randomgen.insert((Integer) random);
         	// Ensures repeats and that 99 is the largest value
-        	random = (Integer)(Math.random() * 50 + 1);
+        	random = (Integer)(int)(Math.random() * 50 + 1);
         }
 
         for (int i = 0; i < differentsizes.length; i++) {
@@ -119,15 +119,15 @@ public class MaxPriorityQueueTest {
     	assertTrue("Max element is incorrect for heap built with all identical values",
     					allsame.getMax() == (Integer) 99);
     	assertTrue("Max element is incorrect for heap built with largest value put in first",
-    					random.getMax() == (Integer) 99);
+    					randomgen.getMax() == (Integer) 99);
     	// Insert another value on random to check largest-inserted-last condition
-    	random.insert((Integer) 100); 
+    	randomgen.insert((Integer) 100); 
     	assertTrue("Max element is incorrect for heap built with largest value put in last",
-    					random.getMax() == (Integer) 100);
+    					randomgen.getMax() == (Integer) 100);
 
     	// Now check that the max value is true over a range of values
     	for (int i = 0; i < differentsizes.length; i++) {
-    		assertTrue("Max element was incorrect when values vary.", differentsizes[i].getMax == (Integer) i);
+    		assertTrue("Max element was incorrect when values vary.", differentsizes[i].getMax() == (Integer) i);
     	}
     }
 
@@ -141,12 +141,12 @@ public class MaxPriorityQueueTest {
     	// but still requires us to use size() to check that the size is as expected.
     	// Tests the range of values up to but not including empty MaxPQ
     	Integer removed = smalltolarge.removeMax();
-    	assertTrue("Remove Max didn't return correct value.", removed.equals(99));
-		assertTrue("Remove Max didn't update size.", smalltolarge.size().equals(99));
+    	assertTrue("Remove Max didn't return correct value.", removed == (99));
+		assertTrue("Remove Max didn't update size.", smalltolarge.size() == (99));
     	while(!smalltolarge.isEmpty()) {
     		removed--;
-    		assertTrue("Remove Max didn't return correct value.", smalltolarge.removeMax().equals(removed));
-    		assertTrue("Remove Max didn't update size.", smalltolarge.size().equals(removed));
+    		assertTrue("Remove Max didn't return correct value.", smalltolarge.removeMax() == (removed));
+    		assertTrue("Remove Max didn't update size.", smalltolarge.size() == (removed));
     	}
     }
     public void removeMaxLargeToSmall() {
@@ -156,20 +156,20 @@ public class MaxPriorityQueueTest {
     	// but still requires us to use size() to check that the size is as expected.
     	// Tests the range of values up to but not including empty MaxPQ
     	Integer removed = largetosmall.removeMax();
-    	assertTrue("Remove Max didn't return correct value.", removed.equals(99));
-		assertTrue("Remove Max didn't update size.", largetosmall.size().equals(99));
+    	assertTrue("Remove Max didn't return correct value.", removed == (99));
+		assertTrue("Remove Max didn't update size.", largetosmall.size() == (99));
     	while(!largetosmall.isEmpty()) {
     		removed--;
-    		assertTrue("Remove Max didn't return correct value.", largetosmall.removeMax().equals(removed));
-    		assertTrue("Remove Max didn't update size.", largetosmall.size().equals(removed));
+    		assertTrue("Remove Max didn't return correct value.", largetosmall.removeMax() == (removed));
+    		assertTrue("Remove Max didn't update size.", largetosmall.size() == (removed));
     	}
     }
     public void removeMaxAllSame() {
     	int size = 100;
     	while(!allsame.isEmpty()) {
     		size--;
-    		assertTrue("Remove Max didn't return correct value.", allsame.removeMax().equals(1));
-    		assertTrue("Remove Max didn't update size.", largetosmall.size().equals(size));
+    		assertTrue("Remove Max didn't return correct value.", allsame.removeMax() == (1));
+    		assertTrue("Remove Max didn't update size.", largetosmall.size() == (size));
     	}
     }
     public void removeMaxRemovesSameAsGetMax() {
@@ -179,7 +179,7 @@ public class MaxPriorityQueueTest {
     		random = randomgen.getMax();
 	    	removed = randomgen.removeMax();
 	    	assertTrue("The value returned by removeMax() was not the same as that returned by getMax()",
-	    					random.equals(removed));	
+	    					random == (removed));	
     	}
     }
 
@@ -195,14 +195,14 @@ public class MaxPriorityQueueTest {
     		randomgen.insert(i - 11);
 
     		// Check that size gets updated
-    		assertTrue("Size not updated on insert", smalltolarge.size().equals(100 + i));
-    		assertTrue("Size not updated on insert", largetosmall.size().equals(100 + i));
-    		assertTrue("Size not updated on insert", randomgen.size().equals(100 + i));
+    		assertTrue("Size not updated on insert", smalltolarge.size() == (100 + i));
+    		assertTrue("Size not updated on insert", largetosmall.size() == (100 + i));
+    		assertTrue("Size not updated on insert", randomgen.size() == (100 + i));
 
     		// Check that maxVal is unchanged
-    		assertTrue("MaxVal changed on insert of value < max", smalltolarge.getMax().equals(99));
-    		assertTrue("MaxVal changed on insert of value < max", largetosmall.getMax().equals(99));
-    		assertTrue("MaxVal changed on insert of value < max", randomgen.getMax().equals(99));
+    		assertTrue("MaxVal changed on insert of value < max", smalltolarge.getMax() == (99));
+    		assertTrue("MaxVal changed on insert of value < max", largetosmall.getMax() == (99));
+    		assertTrue("MaxVal changed on insert of value < max", randomgen.getMax() == (99));
 
     	}
     }
@@ -215,14 +215,14 @@ public class MaxPriorityQueueTest {
     		randomgen.insert(i + 99);
 
     		// Check that size gets updated
-    		assertTrue("Size not updated on insert", smalltolarge.size().equals(100 + i));
-    		assertTrue("Size not updated on insert", largetosmall.size().equals(100 + i));
-    		assertTrue("Size not updated on insert", randomgen.size().equals(100 + i));
+    		assertTrue("Size not updated on insert", smalltolarge.size() == (100 + i));
+    		assertTrue("Size not updated on insert", largetosmall.size() == (100 + i));
+    		assertTrue("Size not updated on insert", randomgen.size() == (100 + i));
 
     		// Check that maxVal is correct
-    		assertTrue("MaxVal not updated when insert value >= max", smalltolarge.getMax().equals(99 + i));
-    		assertTrue("MaxVal not updated when insert value >= max", largetosmall.getMax().equals(99 + i));
-    		assertTrue("MaxVal not updated when insert value >= max", randomgen.getMax().equals(99 + i));
+    		assertTrue("MaxVal not updated when insert value >= max", smalltolarge.getMax() == (99 + i));
+    		assertTrue("MaxVal not updated when insert value >= max", largetosmall.getMax() == (99 + i));
+    		assertTrue("MaxVal not updated when insert value >= max", randomgen.getMax() == (99 + i));
 
     	}
     }
