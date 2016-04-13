@@ -1,3 +1,9 @@
+/**
+ * Karl Tayeb ktayeb1
+ * Jack Karyo jkaryo1
+ * Assignment: A4
+ * Due: 4/13/2016
+ */
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
